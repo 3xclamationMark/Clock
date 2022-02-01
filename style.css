@@ -1,0 +1,93 @@
+body{
+	background-color: black;
+	color: white;
+	scrollbar: none;
+}
+
+:root {
+		cursor: none;
+	--timeHour: 00;
+  --timeMinute: 00;
+	--timeSeconds: 00;
+  --second: 1s;
+  --minute: calc(var(--second) * 60);
+  --hour: calc(var(--minute) * 60);
+}
+
+.cursor {
+  width: 10px;
+  height: 10px;
+	border-radius: 50%;
+  background: white;
+  position: absolute;
+	z-index: 100;
+  left: var(--mouse-x);
+  top: var(--mouse-y);
+	box-shadow: 0 0 10px white,
+		     0 0 20px white,
+		     0 0 40px white,
+		     0 0 80px white,
+		     0 0 120px white,
+		     0 0 160px white;
+}
+
+#digital{
+	text-align: center;
+	font-family: 'Big Shoulders Display', monospace;
+	font-size: 50px;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0); }
+  to { transform: rotate(1turn); }
+}
+
+#seconds{
+  animation: rotate steps(60) var(--minute) infinite;
+	animation-delay: calc(var(--timeMoveseconds) * -1);
+	--width: 5px;
+  --height: 140px;
+  --color: #7a7a7a;
+}
+
+#minutes{
+  animation: rotate linear var(--hour) infinite;
+	animation-delay: calc(var(--timeMoveMin) * -1);
+  --width: 10px;
+  --height: 90px;
+  --color: rgb(71, 71, 71);
+}
+
+#hours{
+  animation: rotate linear calc(var(--hour) * 12) infinite;
+  animation-delay: calc(
+    (var(--timeShiftHour) + var(--timeShiftMinute)) * -1
+  );
+  --width: 10px;
+  --height: 50px;
+  --color: rgb(0, 0, 0);
+}
+
+.clockHand{
+	position: absolute;
+	transform-origin: center 0;
+  top: 50%;
+	left: calc(50% - var(--width) / 2);
+  width: var(--width);
+  height: var(--height);
+  background-color: var(--color);
+	border-radius: calc(var(--width) / 2);
+}
+
+#clock{
+	--timeMoveHour: calc(var(--timeHour) * var(--hour));
+	--timeMoveMin: calc(var(--timeMinute) * var(--minute));
+	--timeMoveseconds: calc(var(--timeSeconds) * var(--second));
+	width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: #a3a3a3;
+  margin: 0 auto;
+  position: relative;
+	transform: rotate(180deg);
+}
