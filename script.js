@@ -1,0 +1,41 @@
+//clock
+let root = document.documentElement;
+var time = new Date();
+var minutes = time.getMinutes();
+var hours = time.getHours();
+var seconds = time.getSeconds();
+
+document.getElementById('digital').innerHTML=hours + ':' + minutes+ ':' + seconds;
+
+setInterval(function () {
+
+	var time = new Date();
+	var minutes = time.getMinutes();
+	var hours = time.getHours();
+	var seconds = time.getSeconds();
+
+	if (seconds<10 && minutes<10){
+		document.getElementById('digital').innerHTML=hours + ':' + '0' + minutes + ':' + '0' + seconds;
+	}
+	else if(seconds<10){
+		document.getElementById('digital').innerHTML=hours + ':' + minutes+ ':' + '0' + seconds;
+	} else if (minutes<10){
+		document.getElementById('digital').innerHTML=hours + ':' + '0' + minutes + ':' + seconds;
+	} else{
+		document.getElementById('digital').innerHTML=hours + ':' + minutes+ ':' + seconds;
+	}
+
+}, 1000);
+
+console.log(hours + ':' + minutes);
+
+root.style.setProperty('--timeHour', hours);
+root.style.setProperty('--timeMinute', minutes);
+root.style.setProperty('--timeSeconds', seconds);
+
+
+//Mouse
+root.addEventListener("mousemove", e => {
+  root.style.setProperty('--mouse-x', e.clientX + "px");
+  root.style.setProperty('--mouse-y', e.clientY + "px");
+});
